@@ -1,4 +1,7 @@
-from InsertionSort import InsertionSort
+from SortingAlgos.InsertionSort import InsertionSort
+from SortingAlgos.SelectionSort import SelectionSort
+from SortingAlgos.MergeSort import MergeSort
+from SortingAlgos.BubbleSort import BubbleSort
 
 class Sorting:
     def __init__(self, algoName, givenArray):
@@ -12,6 +15,7 @@ class Sorting:
 
 if __name__ == "__main__":
     inputArray = [5,6,3,4,9,1,8,2,7]
-    a = Sorting(InsertionSort, inputArray)
+    # InsertionSort, SelectionSort, MergeSort,BubbleSort
+    a = Sorting(BubbleSort, inputArray)
     a.main()
     print "Sorting Done!"

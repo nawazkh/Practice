@@ -1,15 +1,13 @@
 class InsertionSort:
-    # givenArray = ''
     def __init__(self, givenArray):
         self.givenArray = givenArray
     
     def solve(self):
-        print "In solve of Insertion Sort!"
-        # print self.givenArray
+        print "In solve() of Insertion Sort!"
         return self.insertionSort()
     
     def insertionSort(self):
-        print "Starting to sort"
+        print "Starting insertion sort"
         for i in range(1, len(self.givenArray)):
             key = self.givenArray[i]
             j = i - 1
@@ -23,6 +21,4 @@ class InsertionSort:
 if __name__ == "__main__":
     inputArray = [6,5,3,4,9,1,8,7,2]
     a = InsertionSort(inputArray)
-    outputArray = a.solve()
-    print outputArray
-    print "Insertion Sort Done!"
+    print a.solve()

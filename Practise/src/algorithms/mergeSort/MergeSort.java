@@ -33,11 +33,11 @@ public class MergeSort {
 		for(int i = 0; i < n1; i++ ) {
 //			System.out.println(myArray[p+i]);
 //			System.out.println(left[i]);
-			left[i] = myArray[p+i];			
+			left[i] = myArray[p+i];
 		}
-		
+
 		for(int i = 0; i < n2; i++ ) {
-			right[i] = myArray[q+i+1];			
+			right[i] = myArray[q+i+1];
 		}
 		int i = 0;
 		int j = 0;
@@ -62,7 +62,7 @@ public class MergeSort {
 				myArray[k]=left[i];
 				i++;
 			}
-			
+
 		}
 
 	}
