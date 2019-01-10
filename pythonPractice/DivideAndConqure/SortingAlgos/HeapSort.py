@@ -50,7 +50,33 @@ class HeapSort:
             self.heapSize = self.heapSize - 1
             self.max_heapify(self.givenArray, 0)
         return self.givenArray
+
+    def maximum(self): # call build_max_heap before you call this
+        return self.givenArray[0] 
+
+    def heap_extract_max(self):  # call build_max_heap before you call this     
+        if self.heapSize < 0:
+            return "Heap Underflow"
+        max = self.givenArray[0]
+        self.givenArray[0] = self.givenArray[self.heapSize - 1]
+        self.heapSize = self.heapSize - 1
+        self.max_heapify(self.givenArray, 0)
+        return max
+    
+    def heap_increase_key(self, i, key): # call build_max_heap before you call this     
+        if key < self.givenArray[i]:
+            return "Entered value less than the existing value: ",self.givenArray[i]
+        self.givenArray[i] = key
+        while (i > 0 and self.givenArray[self.parent(i)] < self.givenArray[i]):
+            temp = self.givenArray[i]
+            self.givenArray[i] = self.givenArray[self.parent(i)]
+            self.givenArray[self.parent(i)] = temp
+            i = self.parent(i)
         
+    def max_heap_insert(self, key):
+        self.heapSize = self.heapSize + 1
+        self.givenArray[self.heapSize - 1] = sys.maxint * -1
+        self.heap_increase_key(self.heapSize - 1, key)
 
 if __name__ == "__main__":
     inputArray = [6,5,3,4,9,1,8,7,2]

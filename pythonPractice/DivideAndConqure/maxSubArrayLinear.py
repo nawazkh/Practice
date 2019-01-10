@@ -34,6 +34,7 @@ class MaxSubArrayLinear:
         return (start_day, end_day, max_sum)
 
 if __name__ == "__main__":
-    shareMarketArray = [100, 113, 110, 85, 105, 102, 86, 63, 81, 101, 94, 106, 101, 79, 94, 90, 97]
+    # shareMarketArray = [100, 113, 110, 85, 105, 102, 86, 63, 81, 101, 94, 106, 101, 79, 94, 90, 97]
+    shareMarketArray = [7,1,5,3,6,4]
     objMaxSubArrayLinear = MaxSubArrayLinear(shareMarketArray)
     print objMaxSubArrayLinear.solve()
