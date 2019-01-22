@@ -1,4 +1,4 @@
-class SelectionSort:
+xclass SelectionSort:
     def __init__(self, givenArray):
         self.givenArray = givenArray
     
