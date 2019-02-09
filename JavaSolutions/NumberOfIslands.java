@@ -1,73 +1,39 @@
 class Solution {
     public int numIslands(char[][] grid) {
         if(grid.length == 0) return 0;
+        Deque<int[]> q = new ArrayDeque<int[]>();
         int rowLen = grid.length;
         int colLen = grid[0].length;
         int counter = 0;
-        for(int i = 0; i < rowLen; i++){//scan each rows
+        for(int i = 0; i < rowLen; i++){
             for(int j = 0; j < colLen; j++){
-                if(grid[i][j] == '1'){
-                    //perform a depth and breadth search
-                    grid[i][j] = 'x';
+                if(grid[i][j] == '1') {
+                    q.addLast(new int[]{i,j});
+                    grid[i][j] = 'X';
                     counter++;
-                    breadthRightSearch(grid,'x',i, j+1,colLen);
-                    breadthLeftSearch(grid,'x',i, j-1,0);
-                    // 
-                    depthDownSearch(grid, 'x', j, i+1, rowLen);
-                    depthUpSearch(grid, 'x', j, i-1, 0);
-                    // printGrid(grid);
-                    
                 }
-//                 else{
-//                     System.out.println("found x");
-//                     breadthSearch(grid,'x',i, j,colLen);
-//                     depthSearch(grid, 'x', j, i, rowLen);
-                    
-//                     printGrid(grid);
-//                 }
+                while(!q.isEmpty()){
+                    int[] top = q.removeFirst();
+                    int row = top[0],col = top[1];
+                    if(row > 0 && grid[row - 1][col] == '1'){
+                        grid[row - 1][col] = 'X';
+                        q.addLast(new int[]{row - 1,col});
+                    }
+                    if(row < rowLen - 1 && grid[row + 1][col] == '1'){
+                        grid[row + 1][col] = 'X';
+                        q.addLast(new int[]{row + 1,col});
+                    }
+                    if(col > 0 && grid[row][col - 1] == '1'){
+                        grid[row][col - 1] = 'X';
+                        q.addLast(new int[]{row,col - 1});
+                    }
+                    if(col < colLen - 1 && grid[row][col + 1] == '1'){
+                        grid[row][col + 1] = 'X';
+                        q.addLast(new int[]{row,col + 1});
+                    }
+                }
             }
         }
         return counter;
-    }
-    public void breadthRightSearch(char[][] grid, char mark, int rowVal, int left, int right){
-        if(left == right  || grid[rowVal][left] == '0' || grid[rowVal][left] == 'x' ) return;
-        grid[rowVal][left] = 'x';
-        breadthRightSearch(grid,'x',rowVal,left+1,right);
-        depthUpSearch(grid,'x',left,rowVal-1,0);
-        depthDownSearch(grid,'x',left,rowVal+1,grid.length);
-    }
-    public void breadthLeftSearch(char[][] grid, char mark,int rowVal, int left, int right){
-        if(left < right || grid[rowVal][left] == '0' || grid[rowVal][left] == 'x' ) return;
-        grid[rowVal][left] = 'x';
-        breadthLeftSearch(grid,'x',rowVal,left-1,right);
-        depthUpSearch(grid,'x',left,rowVal-1,0);
-        depthDownSearch(grid,'x',left,rowVal+1,grid.length);
-    }
-    
-    public void depthDownSearch(char[][] grid, char mark, int colVal, int top, int bottom){
-        // System.out.println(top+" "+bottom);
-        if(top == bottom || grid[top][colVal] == '0' || grid[top][colVal] == 'x') return;
-        grid[top][colVal] = 'x';
-        depthDownSearch(grid, 'x', colVal, top+1, bottom);
-        breadthRightSearch(grid, 'x', top, colVal + 1, grid[top].length);
-        breadthLeftSearch(grid, 'x', top, colVal - 1 , 0);
-    }
-    
-    public void depthUpSearch(char[][] grid, char mark, int colVal, int top, int bottom){
-        if( top < bottom || grid[top][colVal] == '0' || grid[top][colVal] == 'x') return;
-        grid[top][colVal] = 'x';
-        depthUpSearch(grid, 'x', colVal, top-1, bottom);
-        breadthRightSearch(grid, 'x', top, colVal + 1, grid[top].length);
-        breadthLeftSearch(grid, 'x', top, colVal - 1 , 0);
-    }
-    
-    public void printGrid(char[][] grid){
-        for(int i = 0; i < grid.length; i++){
-            System.out.print("Row "+i+": ");
-            for(int j = 0; j < grid[0].length; j++){
-                System.out.print(grid[i][j]+" ");
-            }
-            System.out.print("\n");
-        }
     }
 }
